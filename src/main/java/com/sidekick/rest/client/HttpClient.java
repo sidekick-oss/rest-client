@@ -17,12 +17,13 @@ public class HttpClient {
     private String baseUrl;
     private OkHttpClient client;
 
+    public HttpClient() {
+        HttpConfig config = new HttpConfig();
+        init(config);
+    }
+
     public HttpClient(HttpConfig config) {
-        this.client = new OkHttpClient.Builder().connectTimeout(config.getConnectTimeout() > 0 ? config.getConnectTimeout() : 10, TimeUnit.SECONDS)
-                .writeTimeout(config.getWriteTimeout() > 0 ? config.getWriteTimeout() : 10, TimeUnit.SECONDS)
-                .readTimeout(config.getReadTimeout() > 0 ? config.getReadTimeout() : 20, TimeUnit.SECONDS)
-                .build();
-        this.baseUrl = "";
+        init(config);
     }
 
     public HttpResponse get(HttpArgs args) {
@@ -90,5 +91,13 @@ public class HttpClient {
             throw new IllegalArgumentException("Unexpected url: " + url);
         }
         return parsed.newBuilder();
+    }
+
+    private void init(HttpConfig config) {
+        this.client = new OkHttpClient.Builder().connectTimeout(config.getConnectTimeout(), TimeUnit.SECONDS)
+                .writeTimeout(config.getWriteTimeout(), TimeUnit.SECONDS)
+                .readTimeout(config.getReadTimeout(), TimeUnit.SECONDS)
+                .build();
+        this.baseUrl = "";
     }
 }

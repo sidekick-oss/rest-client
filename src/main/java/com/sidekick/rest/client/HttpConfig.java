@@ -6,6 +6,12 @@ public class HttpConfig {
     private int writeTimeout;
     private int readTimeout;
 
+    public HttpConfig() {
+        this.connectTimeout = 10;
+        this.readTimeout = 10;
+        this.writeTimeout = 10;
+    }
+
     public int getConnectTimeout() {
         return connectTimeout;
     }

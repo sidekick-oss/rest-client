@@ -15,11 +15,10 @@ public class HttpClientTest {
 
     @Before
     public void setup() {
-        HttpConfig config = new HttpConfig();
-        config.setConnectTimeout(10);
-        config.setReadTimeout(10);
-        config.setWriteTimeout(10);
-
+        HttpConfig config = new HttpConfig()
+                .withConnectTimeout(2)
+                .withReadTimeout(2)
+                .withWriteTimeout(2);
         client = new HttpClient(config);
         client.setBaseUrl("https://jsonplaceholder.typicode.com");
     }
