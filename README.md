@@ -38,6 +38,6 @@ val config = HttpConfig()
     .withWriteTimeout(2)
 client = HttpClient(config)
 client.setBaseUrl("https://jsonplaceholder.typicode.com")
-val response = client.get(HttpArgs().withUrl("posts").withQuery(query))
+val response = client.get(HttpArgs().withUrl("posts"))
 val post = response.json
 ```
