@@ -1,5 +1,7 @@
 package com.sidekick.rest.client;
 
+import java.util.Map;
+
 public class HttpConfig {
 
     private int connectTimeout;
@@ -10,6 +12,11 @@ public class HttpConfig {
         this.connectTimeout = 10;
         this.readTimeout = 10;
         this.writeTimeout = 10;
+    }
+
+    public HttpConfig(Map<String, Integer> config) {
+        super();
+        init(config);
     }
 
     public int getConnectTimeout() {
@@ -49,5 +56,20 @@ public class HttpConfig {
     public HttpConfig withWriteTimeout(int writeTimeout) {
         this.setWriteTimeout(writeTimeout);
         return this;
+    }
+
+    private void init(Map<String, Integer> config) {
+        Integer value = config.get("connectTimeout");
+        if (value != null) {
+            this.connectTimeout = value;
+        }
+        value = config.get("readTimeout");
+        if (value != null) {
+            this.readTimeout = value;
+        }
+        value = config.get("writeTimeout");
+        if (value != null) {
+            this.writeTimeout = value;
+        }
     }
 }

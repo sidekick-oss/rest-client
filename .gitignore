@@ -8,3 +8,6 @@ out
 # Ignore Jetbrains files
 .idea
 *.iml
+
+# Ignore MacOS X files
+.DS_Store

@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static com.sidekick.rest.client.HttpRequest.addQueryParameters;
@@ -18,12 +19,15 @@ public class HttpClient {
     private OkHttpClient client;
 
     public HttpClient() {
-        HttpConfig config = new HttpConfig();
-        init(config);
+        init(new HttpConfig());
     }
 
     public HttpClient(HttpConfig config) {
         init(config);
+    }
+
+    public HttpClient(Map config) {
+        init(new HttpConfig(config));
     }
 
     public HttpResponse get(HttpArgs args) {
@@ -46,6 +50,26 @@ public class HttpClient {
         return call(args, HttpMethod.DELETE);
     }
 
+    public HttpResponse get(Map args) {
+        return get(new HttpArgs(args));
+    }
+
+    public HttpResponse put(Map args) {
+        return put(new HttpArgs(args));
+    }
+
+    public HttpResponse patch(Map args) {
+        return patch(new HttpArgs(args));
+    }
+
+    public HttpResponse post(Map args) {
+        return post(new HttpArgs(args));
+    }
+
+    public HttpResponse delete(Map args) {
+        return delete(new HttpArgs(args));
+    }
+
     public void setBaseUrl(String url) {
         if (url == null || url.isEmpty()) {
             throw new IllegalArgumentException("Missing \"url\" config value");
@@ -56,7 +80,7 @@ public class HttpClient {
         baseUrl = url;
     }
 
-    protected HttpResponse call(HttpArgs args, HttpMethod method) {
+    private HttpResponse call(HttpArgs args, HttpMethod method) {
         try {
             if (args == null) {
                 args = new HttpArgs();

@@ -17,6 +17,11 @@ public class HttpArgs {
         url = "";
     }
 
+    public HttpArgs(Map args) {
+        super();
+        init(args);
+    }
+
     public Map<String, String> getHeaders() {
         return headers;
     }
@@ -67,5 +72,26 @@ public class HttpArgs {
     public HttpArgs withBody(Object body) {
         this.setBody(body);
         return this;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void init(Map args) {
+        Object headers = args.get("headers");
+        Object query = args.get("query");
+        Object body = args.get("body");
+        Object url = args.get("url");
+
+        if (headers != null) {
+            this.setHeaders((Map<String, String>) headers);
+        }
+        if (query != null) {
+            this.setQuery((Map<String, Object>) query);
+        }
+        if (body != null) {
+            this.setBody(body);
+        }
+        if (url != null) {
+            this.setUrl(url.toString());
+        }
     }
 }
