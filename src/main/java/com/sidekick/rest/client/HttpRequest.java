@@ -46,10 +46,10 @@ public class HttpRequest {
         }
     }
 
-    public static void addQueryParameters(HttpUrl.Builder httpUrl, Map<String, String> query) {
+    public static void addQueryParameters(HttpUrl.Builder httpUrl, Map<String, Object> query) {
         if (query != null && !query.isEmpty()) {
-            for (Map.Entry<String, String> param : query.entrySet()) {
-                httpUrl.addQueryParameter(param.getKey(), param.getValue());
+            for (Map.Entry<String, Object> param : query.entrySet()) {
+                httpUrl.addQueryParameter(param.getKey(), param.getValue().toString());
             }
         }
     }

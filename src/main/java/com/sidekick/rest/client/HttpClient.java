@@ -34,6 +34,10 @@ public class HttpClient {
         return call(args, HttpMethod.PUT);
     }
 
+    public HttpResponse patch(HttpArgs args) {
+        return call(args, HttpMethod.PATCH);
+    }
+
     public HttpResponse post(HttpArgs args) {
         return call(args, HttpMethod.POST);
     }
@@ -52,7 +56,7 @@ public class HttpClient {
         baseUrl = url;
     }
 
-    private HttpResponse call(HttpArgs args, HttpMethod method) {
+    protected HttpResponse call(HttpArgs args, HttpMethod method) {
         try {
             if (args == null) {
                 args = new HttpArgs();

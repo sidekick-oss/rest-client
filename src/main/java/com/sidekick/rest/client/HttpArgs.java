@@ -6,7 +6,7 @@ import java.util.Map;
 public class HttpArgs {
 
     private Map<String, String> headers;
-    private Map<String, String> query;
+    private Map<String, Object> query;
     private Object body;
     private String url;
 
@@ -25,11 +25,11 @@ public class HttpArgs {
         this.headers = headers;
     }
 
-    public Map<String, String> getQuery() {
+    public Map<String, Object> getQuery() {
         return query;
     }
 
-    public void setQuery(Map<String, String> query) {
+    public void setQuery(Map<String, Object> query) {
         this.query = query;
     }
 
@@ -59,7 +59,7 @@ public class HttpArgs {
         return this;
     }
 
-    public HttpArgs withQuery(Map<String, String> query) {
+    public HttpArgs withQuery(Map<String, Object> query) {
         this.setQuery(query);
         return this;
     }

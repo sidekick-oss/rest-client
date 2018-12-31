@@ -46,7 +46,7 @@ public class HttpClientTest {
 
     @Test
     public void getCommentsOfPost() {
-        Map<String, String> query = new HashMap<>();
+        Map<String, Object> query = new HashMap<>();
         query.put("postId", "1");
         HttpResponse response = client.get(new HttpArgs()
                 .withUrl("comments")
